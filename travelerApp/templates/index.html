@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% set css_name = "homepage"%}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}<link rel="stylesheet" href="{{ url_for('static', filename='css/page-homepage.css') }}?v=0.1">{% endblock %}
+
+{% block bodyattributes %}style="background-image: url({{ url_for('static', filename='images/paperbagbackground.jpg') }})"{% endblock %}
+
+{% block content %}
+    <div class="homepage font-just-me">      
+        <h1>
+            The ADHDM<br />
+            <img src="{{ url_for('static', filename='images/theADHDMlogo.png') }}" class="site-logo" alt="The ADHDM logo">
+        </h1>
+        <h2>Resources for the World's Greatest Role Playing Game</h2>
+        <div class="breathe">  </div>
+        <div class="w3-cell-row w3-container">
+            <div class="w3-half centered"">
+                <h3>For My Table</h3>
+                <p class="w3-xxlarge"><a href="{{ url_for('security.login') }}" target="_top">Login to your Player Account</a></p>
+            </div>
+            <div class="w3-half centered">
+                <h3>More Stuff</h3>
+            </div>
+        </div>
+    </div>
+{% endblock %}

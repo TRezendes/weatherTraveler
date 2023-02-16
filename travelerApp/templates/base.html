@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>The ADHDM | {% block title %}{% endblock %}</title>
+
+    <meta name="description" content="Resources for D&D and other TTRPGs">
+    <meta name="author" content="Timothy Rezendes">
+
+    <meta property="og:title" content="The ADHDM">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.TheADHDM.com">
+    <meta property="og:description" content="Resources for D&D and other TTRPGs">
+    <meta property="og:image" content="{{ url_for('static', filename="images/theADHDMlogo.png") }}">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-57x57.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-60x60.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-72x72.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-76x76.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-114x114.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-120x120.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-144x144.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-152x152.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon-folder/apple-icon-180x180.png') }}?v=2.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon-folder/apple-touch-icon.png') }}?v=2.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-folder/favicon-32x32.png') }}?v=2.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-folder/favicon-16x16.png') }}?v=2.0">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='images/favicon-folder/android-chrome-192x192.png') }}?v=2.0">
+    <link rel="manifest" href="{{ url_for('static', filename='images/favicon-folder/site.webmanifest') }}?v=2.0">
+    <link rel="mask-icon" href="{{ url_for('static', filename='images/favicon-folder/safari-pinned-tab.svg') }}?v=2.0" color="#eb10ae">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon-folder/favicon.ico') }}?v=2.0">
+    <meta name="apple-mobile-web-app-title" content="The ADHDM">
+    <meta name="application-name" content="The ADHDM">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/favicon-folder/mstile-144x144.png') }}?v=2.0">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Permanent+Marker&family=Antonio&family=IM+Fell+English:ital@0;1&family=Rambla:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/w3.css') }}?v=4.10">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fonts.css') }}?v=0.1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}?v=0.1">
+    {% block stylesheets %}{% endblock %}
+
+    <base target="_top">
+
+
+    <script src="https://kit.fontawesome.com/56f2c79116.js" crossorigin="anonymous"></script>
+
+    <!-- Alert close script from https://www.w3schools.com/howto/howto_js_alert.asp -->
+    <script>
+        // Get all elements with class="closebtn"
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        // Loop through all close buttons
+        for (i = 0; i < close.length; i++) {
+            // When someone clicks on a close button
+            close[i].onclick = function() {
+
+                // Get the parent of <span class="closebtn"> (<div class="alert">)
+                var div = this.parentElement;
+
+                // Set the opacity of div to 0 (transparent)
+                div.style.opacity = "0";
+
+                // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+                setTimeout(function() {
+                    div.style.display = "none";
+                }, 600);
+            }
+        }
+    </script>
+
+
+    {% endblock %}
+</head>
+
+<body {% block bodyattributes %}{% endblock %}>
+    <div class="content-root">
+        <div id="header">
+            <nav>
+                {% block nav %}
+                {% endblock %}
+            </nav>
+            <!-- Flash Message Display Code -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="w3-panel w3-{{ category }}"">
+                     <button type=" button" class="close-button" aria-label="Close" onclick="this.parentElement.style.display='none';">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <!-- -->
+
+        </div>
+
+        <div id="content" class="centered content-wrap">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <!-- A little bit of breathing room… -->
+        <div class="breathe">
+            &nbsp;
+        </div>
+
+        {% include ['players/section_footer.html', 'footer.html'] %}
+    </div>
+</body>
+<script>
+    
+    // All page modals
+    var modals = document.querySelectorAll('.w3-modal');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target.classList.contains('w3-modal')) {
+         for (var index in modals) {
+          if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+         }
+        }
+    }
+</script>
+</html>
