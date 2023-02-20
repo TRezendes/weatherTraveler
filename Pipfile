@@ -10,6 +10,8 @@ sqlalchemy = "*"
 rikeripsum = {path = "C:/Users/trezendes/projects/clones/rikeripsum"}
 flask-wtf = "*"
 flask-sqlalchemy = "*"
+pyowm = "*"
+googlemaps = "*"
 
 [dev-packages]
 

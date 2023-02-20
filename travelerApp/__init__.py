@@ -1,6 +1,8 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, session
 from rikeripsum.rikeripsum import generate_paragraph as RikerIpsum
+from pyowm.utils.config import get_config_from
 from flask_sqlalchemy import SQLAlchemy
+from pyowm import OWM
 import response
 import json
 
@@ -9,17 +11,29 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     
-    #config = app.config.from_pyfile('../config.py')
-    with open('/Users/trezendes/Projects/theadhdmdotcom/config.json') as config_file:
+    
+    with open('flask_config.json') as config_file:
         config = json.load(config_file)
 
     # General configuration
     app.config['SECRET_KEY'] = config.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = config.get('DEV_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.get('SQLALCHEMY_TRACK_MODIFICATIONS')  
+    app.config['OWM_API_KEY'] = config.get('OWM_API_KEY')
 
     db.init_app(app)
     db.app = app
+
+    owm_api_key = app.config['OWM_API_KEY']
+    session['owm_key'] = owm_api_key
+
+    gmaps_api_key = app.config['OWM_API_KEY']
+    ['gm_key'] = gmaps_api_key
+    
+    #owm_config_dict = get_config_from('owm_config.json')
+    #owm = OWM(owm_api_key,owm_config_dict)
+
+
     
     app.jinja_env.add_extension('jinja2.ext.do')
 
@@ -27,7 +41,7 @@ def create_app():
     with app.app_context():
         # Register blueprints
         from .weather import weather as weather
-        app.register_blueprint(weather, url_prefix='/primary')
+        app.register_blueprint(weather, url_prefix='/weather')
 
     # Add RikerIpsum template global
     @app.template_global('RikerIpsum')

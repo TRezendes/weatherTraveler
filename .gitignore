@@ -7,6 +7,7 @@ scratch_folder/
 *jupyter*
 Supplemental/
 **/.nova
-config.json
+*config.json
+*bubbly
 attributions.txt
 .pyc
