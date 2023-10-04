@@ -28,10 +28,10 @@ def create_app():
     session['owm_key'] = owm_api_key
 
     gmaps_api_key = app.config['OWM_API_KEY']
-    ['gm_key'] = gmaps_api_key
+    session['gm_key'] = gmaps_api_key
     
-    #owm_config_dict = get_config_from('owm_config.json')
-    #owm = OWM(owm_api_key,owm_config_dict)
+    owm_config_dict = get_config_from('owm_config.json')
+    owm = OWM(owm_api_key,owm_config_dict)
 
 
     
